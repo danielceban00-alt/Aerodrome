@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dmeiygsgnx0wl"]
+
+[ext_resource type="Script" uid="uid://badjorm3i1upx" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Shader" uid="uid://cffriw4q74i23" path="res://globe.gdshader" id="2_1bvp3"]
+[ext_resource type="Shader" uid="uid://dv0yiqf6cluid" path="res://main.gdshader" id="2_h2yge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wiet6"]
+render_priority = 0
+shader = ExtResource("2_1bvp3")
+shader_parameter/ocean_color = Color(0.05, 0.25, 0.55, 1)
+shader_parameter/line_color = Color(0.6, 0.8, 1, 1)
+shader_parameter/meridians = 24.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mm1bc"]
+albedo_color = Color(1.1070073e-06, 0, 0.5306759, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4kxuq"]
+material = SubResource("StandardMaterial3D_mm1bc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwqyf"]
+shader = ExtResource("2_h2yge")
+
+[sub_resource type="Sky" id="Sky_1bvp3"]
+sky_material = SubResource("ShaderMaterial_qwqyf")
+
+[sub_resource type="Environment" id="Environment_4kxuq"]
+background_mode = 2
+sky = SubResource("Sky_1bvp3")
+
+[node name="Main" type="Node3D" unique_id=167608770]
+script = ExtResource("1_0xm2m")
+
+[node name="Globe" type="MeshInstance3D" parent="." unique_id=1810038877]
+material_override = SubResource("ShaderMaterial_wiet6")
+mesh = SubResource("SphereMesh_4kxuq")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1507877229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=690724139]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1978098181]
+environment = SubResource("Environment_4kxuq")
