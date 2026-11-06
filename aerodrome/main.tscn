@@ -3,13 +3,15 @@
 [ext_resource type="Script" uid="uid://badjorm3i1upx" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Shader" uid="uid://cffriw4q74i23" path="res://globe.gdshader" id="2_1bvp3"]
 [ext_resource type="Shader" uid="uid://dv0yiqf6cluid" path="res://main.gdshader" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://ds3ba4tdteh2a" path="res://borders.gd" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://ojtghoro0ws6" path="res://land.png" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://dpst1nmfdjy02" path="res://labels.gd" id="5_7mycd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiet6"]
 render_priority = 0
 shader = ExtResource("2_1bvp3")
+shader_parameter/land_tex = ExtResource("3_lquwl")
 shader_parameter/ocean_color = Color(0.05, 0.25, 0.55, 1)
-shader_parameter/line_color = Color(0.6, 0.8, 1, 1)
-shader_parameter/meridians = 24.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mm1bc"]
 albedo_color = Color(1.1070073e-06, 0, 0.5306759, 1)
@@ -34,8 +36,15 @@ script = ExtResource("1_0xm2m")
 material_override = SubResource("ShaderMaterial_wiet6")
 mesh = SubResource("SphereMesh_4kxuq")
 
+[node name="Borders" type="MeshInstance3D" parent="Globe" unique_id=286011702]
+script = ExtResource("3_1bvp3")
+
+[node name="Labels" type="Node3D" parent="Globe" unique_id=1445561020]
+script = ExtResource("5_7mycd")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1507877229]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+near = 0.001
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=690724139]
 transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)

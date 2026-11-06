@@ -1,13 +1,20 @@
 shader_type spatial;
 
-uniform vec3 ocean_color : source_color = vec3(0.05, 0.25, 0.55);
-uniform vec3 line_color : source_color = vec3(0.6, 0.8, 1.0);
-uniform float meridians = 24.0;  // 24 lines = one every 15 degrees
+uniform sampler2D land_tex : source_color, filter_linear;
+uniform vec3 ocean_color : source_color = vec3(0.04, 0.2, 0.45);
+
+varying vec3 local_pos;
+
+void vertex() {
+	local_pos = VERTEX;
+}
 
 void fragment() {
-	vec2 g = UV * vec2(meridians, meridians * 0.5);
-	vec2 d = abs(fract(g - 0.5) - 0.5) / fwidth(g);
-	float line = 1.0 - min(min(d.x, d.y), 1.0);
-	ALBEDO = mix(ocean_color, line_color, line * 0.4);
-	ROUGHNESS = 0.6;
+	vec3 p = normalize(local_pos);
+	float lon = atan(p.x, p.z);
+	float lat = asin(clamp(p.y, -1.0, 1.0));
+	vec2 uv = vec2(lon / TAU + 0.5, 0.5 - lat / PI);
+	vec4 land = textureLod(land_tex, uv, 0.0);
+	ALBEDO = mix(ocean_color, land.rgb, land.a);
+	ROUGHNESS = 0.85;
 }
