@@ -5,7 +5,9 @@
 [ext_resource type="Shader" uid="uid://dv0yiqf6cluid" path="res://main.gdshader" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://ds3ba4tdteh2a" path="res://borders.gd" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://ojtghoro0ws6" path="res://land.png" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://kkc38jxujfl7" path="res://timeline_manager.gd" id="4_5vw27"]
 [ext_resource type="Script" uid="uid://dpst1nmfdjy02" path="res://labels.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://bctjljbsxpwdb" path="res://clock_ui.gd" id="7_272bh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiet6"]
 render_priority = 0
@@ -35,6 +37,7 @@ script = ExtResource("1_0xm2m")
 [node name="Globe" type="MeshInstance3D" parent="." unique_id=1810038877]
 material_override = SubResource("ShaderMaterial_wiet6")
 mesh = SubResource("SphereMesh_4kxuq")
+script = ExtResource("4_5vw27")
 
 [node name="Borders" type="MeshInstance3D" parent="Globe" unique_id=286011702]
 script = ExtResource("3_1bvp3")
@@ -51,3 +54,6 @@ transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.707
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1978098181]
 environment = SubResource("Environment_4kxuq")
+
+[node name="ClockUI" type="CanvasLayer" parent="." unique_id=1943085582]
+script = ExtResource("7_272bh")

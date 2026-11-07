@@ -33,6 +33,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_spin(velocity)
 
 func _process(delta: float) -> void:
+	if Engine.time_scale > 0.0:
+		delta /= Engine.time_scale
 	if not dragging:
 		_spin(velocity)
 		velocity = velocity.lerp(Vector2.ZERO, 4.0 * delta)
@@ -40,7 +42,6 @@ func _process(delta: float) -> void:
 			yaw += IDLE_SPIN * delta
 			_apply_rotation()
 	cam.position.z = lerpf(cam.position.z, distance, 10.0 * delta)
-
 func _spin(v: Vector2) -> void:
 	yaw += v.x
 	pitch = clampf(pitch + v.y, -deg_to_rad(MAX_PITCH), deg_to_rad(MAX_PITCH))
