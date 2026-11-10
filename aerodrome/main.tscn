@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://kkc38jxujfl7" path="res://timeline_manager.gd" id="4_5vw27"]
 [ext_resource type="Script" uid="uid://dpst1nmfdjy02" path="res://labels.gd" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://bctjljbsxpwdb" path="res://clock_ui.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://2bj84u0b41k4" path="res://airport_picker.gd" id="9_kek77"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiet6"]
 render_priority = 0
@@ -57,3 +58,6 @@ environment = SubResource("Environment_4kxuq")
 
 [node name="ClockUI" type="CanvasLayer" parent="." unique_id=1943085582]
 script = ExtResource("7_272bh")
+
+[node name="AirportPicker" type="CanvasLayer" parent="." unique_id=1132240370]
+script = ExtResource("9_kek77")

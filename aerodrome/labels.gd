@@ -8,10 +8,15 @@ const MIN_SCREEN_FRAC := 0.015  # label must be at least this tall (fraction of 
 var labels: Array = []
 
 func _ready() -> void:
-	var text := FileAccess.get_file_as_string("res://countries.json")
-	var countries = JSON.parse_string(text)
-	for c in countries:
-		var country_name: String = c["name"]
+	# the timeline manager (on the Globe) tells us which territories exist at each date
+	get_parent().map_changed.connect(_rebuild)
+
+func _rebuild(territories: Array) -> void:
+	for l in labels:
+		l["node"].queue_free()
+	labels.clear()
+	for c in territories:
+		var country_name: String = c["n"]
 		var width_world := deg_to_rad(c["w"]) * GLOBE_RADIUS
 		var pixel_size := 0.6 * width_world / (maxf(country_name.length(), 1.0) * FONT_SIZE * 0.5)
 
@@ -38,7 +43,8 @@ func _process(_delta: float) -> void:
 	var view_height := 2.0 * tan(deg_to_rad(cam.fov) / 2.0) * maxf(altitude, 0.001)
 	for l in labels:
 		var node: Label3D = l["node"]
-		node.visible = (l["height"] / view_height) > MIN_SCREEN_FRAC
+		if is_instance_valid(node):
+			node.visible = (l["height"] / view_height) > MIN_SCREEN_FRAC
 
 func _to_sphere(lon_deg: float, lat_deg: float) -> Vector3:
 	var lon := deg_to_rad(lon_deg)
