@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://dpst1nmfdjy02" path="res://labels.gd" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://bctjljbsxpwdb" path="res://clock_ui.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://2bj84u0b41k4" path="res://airport_picker.gd" id="9_kek77"]
+[ext_resource type="Script" uid="uid://cv02snead2pou" path="res://airport_menu.gd" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://54130p1plgll" path="res://airport_view.gd" id="11_efxa6"]
+[ext_resource type="Script" uid="uid://ytdxlm4gchif" path="res://airport_economy.gd" id="12_dg77c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiet6"]
 render_priority = 0
@@ -61,3 +64,12 @@ script = ExtResource("7_272bh")
 
 [node name="AirportPicker" type="CanvasLayer" parent="." unique_id=1132240370]
 script = ExtResource("9_kek77")
+
+[node name="AirportMenu" type="CanvasLayer" parent="." unique_id=408804485]
+script = ExtResource("10_4c57u")
+
+[node name="AirportView" type="CanvasLayer" parent="." unique_id=252998092]
+script = ExtResource("11_efxa6")
+
+[node name="AirportEconomy" type="CanvasLayer" parent="." unique_id=177763812]
+script = ExtResource("12_dg77c")

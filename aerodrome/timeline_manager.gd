@@ -11,7 +11,6 @@ var line_mat: StandardMaterial3D
 var popup: CanvasLayer
 var holder: Node3D
 
-# own date counter, starts 1 Jan 1920
 var y := 1920
 var m := 1
 var d := 1
@@ -20,6 +19,8 @@ var test_speed := 1.0
 var speed_btn: Button
 
 signal map_changed(territories)
+signal popup_opened
+signal popup_closed
 
 func _read(path):
 	if not FileAccess.file_exists(path):
@@ -167,12 +168,14 @@ func _show_popup(ev: Dictionary) -> void:
 	box.add_child(body)
 	box.add_child(btn)
 	Engine.time_scale = 0.0
+	popup_opened.emit()
 
 func _close_popup() -> void:
 	if popup:
 		popup.queue_free()
 		popup = null
 	Engine.time_scale = test_speed
+	popup_closed.emit()
 
 func _make_speed_button() -> void:
 	var layer := CanvasLayer.new()
